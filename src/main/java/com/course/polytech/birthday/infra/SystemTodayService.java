@@ -1,4 +1,12 @@
 package com.course.polytech.birthday.infra;
 
-public class SystemTodayService {
+import com.course.polytech.birthday.domain.TodayService;
+
+import java.time.LocalDate;
+
+public class SystemTodayService implements TodayService {
+    @Override
+    public LocalDate today() {
+        return LocalDate.now();
+    }
 }

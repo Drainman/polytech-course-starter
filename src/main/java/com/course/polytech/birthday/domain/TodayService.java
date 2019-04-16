@@ -1,4 +1,7 @@
 package com.course.polytech.birthday.domain;
 
-public class TodayService {
+import java.time.LocalDate;
+
+public interface TodayService {
+    LocalDate today();
 }

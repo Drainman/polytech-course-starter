@@ -1,4 +1,4 @@
-package com.course.polytech.birthday;
+package com.course.polytech.birthday.domain;
 
 import java.util.List;
 

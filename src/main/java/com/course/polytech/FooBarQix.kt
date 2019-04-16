@@ -15,34 +15,31 @@ object FooBarQix {
     }
 
     fun convert(number: Int): String {
-        val result = NUMBER_2_STRING.keys
-                .stream()
-                .map { k -> convert(number, k) }
-                .collect<String, *>(Collectors.joining())
+        val result = NUMBER_2_STRING.keys.joinToString { k -> convert(number, k) }
         return if (result.isEmpty()) number.toString() else result
     }
 
-    private fun convert(number: Int, key: Int?): String {
+    private fun convert(number: Int, key: Int): String {
         return manageDivisibility(number, key) + manageContaining(number, key)
     }
 
-    private fun manageContaining(number: Int, value: Int?): String {
-        val charForNumber = Character.forDigit(value!!, 10)
+    private fun manageContaining(number: Int, value: Int): String {
+        val charForNumber = Character.forDigit(value, 10)
         return number.toString()
                 .chars()
                 .filter { x -> charForNumber.toInt() == x }
                 .mapToObj<String> { c -> NUMBER_2_STRING[value] }
-                .collect<String, *>(Collectors.joining())
+                .collect(Collectors.joining())
     }
 
-    private fun manageDivisibility(number: Int, value: Int?): String {
-        return if (number % value!! == 0) {
-            NUMBER_2_STRING[value]
+    private fun manageDivisibility(number: Int, value: Int): String {
+        return if (number % value == 0) {
+            NUMBER_2_STRING[value]!!
         } else ""
     }
 
     @JvmStatic
-    fun main(args: Array<String>) {
+    fun main() {
         IntStream.range(1, 100).forEach { number -> println(convert(number)) }
     }
 
